@@ -1,0 +1,47 @@
+# Pre-commit hooks — quality gates for an exploration/docs-heavy repo
+# See https://pre-commit.com for more information
+
+repos:
+  # --- General file hygiene ---
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+      - id: check-yaml
+        args: [--allow-multiple-documents]
+      - id: check-json
+        exclude: '^(\.devcontainer/|\.vscode/)'
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=500]
+      - id: detect-private-key
+      - id: mixed-line-ending
+        args: [--fix=lf]
+
+  # --- Markdown linting ---
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.17.2
+    hooks:
+      - id: markdownlint-cli2
+        args: []
+        exclude: '^(\.github/|\.ai-team/|\.ai-team-templates/)'
+
+  # --- Forbidden-path guard (mirrors squad-main-guard.yml) ---
+  - repo: local
+    hooks:
+      - id: squad-main-guard
+        name: squad-main-guard
+        language: script
+        entry: .githooks/squad-main-guard.sh
+        always_run: true
+        pass_filenames: false
+
+  # --- Python formatting & linting (if/when Python code appears) ---
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.9.7
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format

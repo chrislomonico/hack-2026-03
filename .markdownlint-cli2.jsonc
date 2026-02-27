@@ -1,0 +1,63 @@
+// https://github.com/DavidAnson/markdownlint-cli2#configuration
+{
+  "config": {
+    // MD010 - Hard tabs (allow in code blocks)
+    "MD010": {
+      "code_blocks": false
+    },
+
+    // MD013 - Line length (disabled — exploration docs shouldn't be constrained)
+    "MD013": false,
+
+    // MD024 - Multiple headings with the same content (allow in different nesting contexts)
+    "MD024": {
+      "siblings_only": true
+    },
+
+    // MD025 - Multiple top-level headings (disabled — some docs have title + appendix structure)
+    "MD025": false,
+
+    // MD026 - Trailing punctuation in headings (disabled — common for question-style headings)
+    "MD026": false,
+
+    // MD028 - Blank line inside blockquote (disabled)
+    "MD028": false,
+
+    // MD032 - Lists should be surrounded by blank lines (disabled)
+    "MD032": false,
+
+    // MD033 - Inline HTML (allow HTML comments and common elements)
+    "MD033": false,
+
+    // MD036 - Emphasis used instead of a heading (disabled)
+    "MD036": false,
+
+    // MD040 - Fenced code blocks should have a language specified (disabled)
+    "MD040": false,
+
+    // MD041 - First line in a file should be a top-level heading (disabled — frontmatter counts)
+    "MD041": false,
+
+    // MD060 - Table column count (disabled)
+    "MD060": false
+  },
+
+  // Glob patterns for files to lint
+  "globs": [
+    "**/*.md"
+  ],
+
+  // Glob patterns for files to ignore
+  "ignores": [
+    "**/node_modules/**",
+    ".squad*/**",
+    ".ai-team/**",
+    ".ai-team-templates/**",
+    "**/.agents*/**",
+    "**/.github*/**",
+    "**/context/**",
+    "docs/engagement/**",
+    "spikes/**",
+    "lib/**"
+  ]
+}
